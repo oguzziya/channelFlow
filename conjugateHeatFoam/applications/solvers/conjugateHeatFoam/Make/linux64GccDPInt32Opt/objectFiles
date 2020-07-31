@@ -1,0 +1,5 @@
+OBJECTS = \
+$(OBJECTS_DIR)/coupleManager.o\
+$(OBJECTS_DIR)/regionCoupleTemperatureFvPatchScalarField.o\
+$(OBJECTS_DIR)/regionCoupleHeatFluxFvPatchScalarField.o\
+$(OBJECTS_DIR)/conjugateHeatFoam.o

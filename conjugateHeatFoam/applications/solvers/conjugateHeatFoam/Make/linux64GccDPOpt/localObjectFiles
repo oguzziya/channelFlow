@@ -1,0 +1,5 @@
+LOCAL_OBJECTS = \
+coupleManager.o\
+regionCoupleTemperatureFvPatchScalarField.o\
+regionCoupleHeatFluxFvPatchScalarField.o\
+conjugateHeatFoam.o

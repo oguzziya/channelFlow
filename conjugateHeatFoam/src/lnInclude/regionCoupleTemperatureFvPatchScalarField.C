@@ -1,0 +1,1 @@
+../coupledFvPatchFields/regionCoupleTemperature/regionCoupleTemperatureFvPatchScalarField.C

@@ -1,0 +1,5 @@
+SOURCE = \
+coupleManager/coupleManager.C\
+coupledFvPatchFields/regionCoupleTemperature/regionCoupleTemperatureFvPatchScalarField.C\
+coupledFvPatchFields/regionCoupleHeatFlux/regionCoupleHeatFluxFvPatchScalarField.C\
+conjugateHeatFoam.C
