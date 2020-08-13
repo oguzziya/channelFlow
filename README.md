@@ -19,9 +19,10 @@ All the cases can be directly run by moving in respective directory and executin
 # preCICE Coupling
 
 ## Software Versions
-- OpenFOAM: 19.20
+- OpenFOAM (conjugateHeatFoam): foam-extend 4.1
+- OpenFOAM (preCICE): 19.12
 - preCICE: 2.1.0
-- preCICE OpenFOAM Adapter: 
+- preCICE OpenFOAM Adapter: c49b862aab4845ae79b8b7257a20e15ba5a0019c
 
 ## Participant Setup
 - Fluid Solver: `scalarTransportFoam`
