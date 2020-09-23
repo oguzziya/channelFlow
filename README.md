@@ -47,9 +47,9 @@ Coupling parameters are:
 ### Quasi-Newton
 - **Quasi-Newton Scheme:** IQN-ILS
 - **Initial relaxation factor:** 0.5
-- **Maximum used iterations:** 80
+- **Maximum used iterations:** 100
 - **Reused time windows:** 10
-- **Filter:** QR1 with 1e-8
+- **Filter:** QR2 with 1e-3
 
 # Results
 ## Physics
