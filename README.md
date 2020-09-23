@@ -1,5 +1,10 @@
 This repository contains preCICE test cases for conjugate heat transfer of channel flow, which are extension to the work of Holger Marschall [conjugateHeatFoam](https://bitbucket.org/hmarschall/conjugateheatfoam/src/master/)
 
+# Branch structure
+master: buoyantPimpleFoam-laplacianFoam coupling without results and comments
+buoyantPimpleFoam-laplacianFoam: buoyantPimpleFoam-laplacianFoam coupling with results
+scalarTransportFoam-laplacianFoam: scalarTransportFoam-laplacianFoam coupling with results
+
 # Directory Structure
 **conjugateHeatFoam** Copy of the repository: [conjugateHeatFoam](https://bitbucket.org/hmarschall/conjugateheatfoam/src/master/)
 
@@ -25,13 +30,16 @@ All the cases can be directly run by moving in respective directory and executin
 - preCICE OpenFOAM Adapter: c49b862aab4845ae79b8b7257a20e15ba5a0019c
 
 ## Participant Setup
-- Fluid Solver: `buoyantPimpleFoam`
-- Solid Solver: `laplacianFoam`
+In order to make the two cases similar to each other as much as possible, `scalarTransportFoam` is used for fluid flow solver. However, OpenFOAM adapter requires solver to access Heat-Flux data, which is not trivial for `scalarTransportFoam`. Therefore it ends up with problems in the flux calculation. In order to resolve the issue, `buoyantPimpleFoam` is also used for fluid participant, which is supported by OpenFOAM Adapter out-of-the box. 
+
+For completeness, we provide both approaches in different branches as:
+
+- buoyantPimpleFoam-laplacianFoam
+- scalarTransportFoam-laplacianFoam
+
+You can checkout to individual branch to see the respective case and results. In the master, setup for `buoyantPimpleFoam-laplacianFoam` exists.
 
 All the boundary conditions, physical properties, solver and discretization settings are tried to be hold the same as the main OpenFOAM cases.
-
-For thermophysical quantities, buoyantPimpleFoam crashes for high Prandtl numbers. Therefore, the heat transfer coefficient is tried to be held
-same as the conjugateHeatFoam case by modifying the heat capacity.
 
 Coupling parameters are:
 - **Time window size:** 0.01
@@ -50,29 +58,3 @@ Coupling parameters are:
 - **Maximum used iterations:** 80
 - **Reused time windows:** 10
 - **Filter:** QR1 with 1e-8
-
-# Results
-## Physics
-As for quick qualitative check, temperature contours are compared for implicit and explicit coupling. Acceleration method for the implicit coupling is quasi-Newton for preCICE case.
-
-<img src="results/Temperature_contours.png" width="600">
-
-in general, physics of the flow seems quite similar in both variants, OpenFOAM and preCICE. preCICE ones seems for diffusive which can be due to differences in thermophysical quantities. For more quantitative comparison, values at **y=0.03** along the x-direction.
-
-<img src="results/Temperature_plot.png" width="600">
-
-As it can be seen, we see large difference between the monolithic and partitioned approach for conjugateHeatFoam, while explicit and implicit coupling shows no difference for the preCICE cases. If we compare the implicit results of preCICE and conjugateHeatFoam, we see variation in the quantitive results. We suspect that it is related to one of the physical quantities, one possibility is the difference while defining the thermophysical quantities, the other is the contact resistance between solid and fluid, which we could not figure out whether it is used in conjugateHeatFoam or not.
-
-## Coupling
-In order to compare the performance of difference acceleration techniques, number of coupling iterations at each time step are plotted.
-
-<img src="results/Iterations.png" width="600">
-
-For first 200 iterations, average iteration numbers per timestep are
-
-- **Underrelaxation** : 10.95
-- **Aitken**: 3.38
-- **IQN-ILS**: 2.20
-- **conjugateHeatFoam**: 2.90
-
-Number of coupling iterations are the same after time step of ~200. The acceleration schemes of preCICE show significant difference in inner iterations when compared to underrelaxation counterpart. In addition, quasi-Newton scheme shows superior performance over conjugateHeatFoam iterations, as we could expect.
