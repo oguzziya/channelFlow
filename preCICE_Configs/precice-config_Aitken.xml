@@ -47,13 +47,11 @@
         <exchange data="Heat-Flux" mesh="Solid-Mesh" from="Solid" to="Fluid"/>
         <max-iterations value="100"/>
         <relative-convergence-measure limit="1.0e-5" data="Temperature" mesh="Fluid-Mesh"/>
-	<acceleration:IQN-ILS>
-            <data mesh="Solid-Mesh" name="Heat-Flux" />
-            <initial-relaxation value="0.5" />
-            <max-used-iterations value="80" />
-            <time-windows-reused value="10" />
-            <filter type="QR1" limit="1e-8" />
-        </acceleration:IQN-ILS>
+	<relative-convergence-measure limit="1.0e-5" data="Heat-Flux" mesh="Solid-Mesh"/>
+	<acceleration:aitken>
+	    <data name="Heat-Flux" mesh="Solid-Mesh"/>
+            <initial-relaxation value="0.5"/>
+        </acceleration:aitken>
     </coupling-scheme:serial-implicit>
 
     </solver-interface>

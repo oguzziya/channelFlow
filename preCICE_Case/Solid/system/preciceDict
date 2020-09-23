@@ -13,6 +13,12 @@ participant Solid;
 
 modules (CHT);
 
+CHT
+{
+    k	[1 1 -3 -1 0 0 0]	100;
+    solverType	"basic";
+}
+
 interfaces
 {
   Interface1
@@ -30,10 +36,4 @@ interfaces
       Heat-Flux
     );
   };
-};
-
-CHT
-{
-   k   [ 1  1 -3 -1 0 0 0 ] 100;
-   solverType "basic";
 };

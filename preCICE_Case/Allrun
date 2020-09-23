@@ -9,7 +9,7 @@
 
 # Participant 1: Fluid
 Participant1="Fluid"
-Solver1="scalarTransportFoam"
+Solver1="buoyantPimpleFoam"
 
     # Prepare
     echo "Preparing the ${Participant1} participant..."

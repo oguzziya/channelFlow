@@ -9,64 +9,53 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    location    "system";
-    object      controlDict;
+    class       volScalarField;
+    location    "0";
+    object      k;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     laplacianFoam;
+dimensions      [ 0 2 -2 0 0 0 0 ];
 
-startFrom       startTime;
+internalField   uniform 0.1;
 
-startTime       0;
-
-stopAt          endTime;
-
-endTime         10;
-
-deltaT          0.01;
-
-writeControl    runTime;
-
-writeInterval   0.2;
-
-purgeWrite      0;
-
-writeFormat     ascii;
-
-writePrecision  6;
-
-writeCompression off;
-
-timeFormat      general;
-
-timePrecision   6;
-
-runTimeModifiable false;
-
-functions
+boundaryField
 {
-    preCICE_Adapter
+    interface
     {
-        type preciceAdapterFunctionObject;
-        libs ("libpreciceAdapterFunctionObject.so");
+        type            kqRWallFunction;
+        value           uniform 0.1;
     }
-
-    Heat-Flux
+    inlet
     {
-	type	grad;
-	libs	(fieldFunctionObjects);
-
-	field	T;
-
-	result		Heat-Flux;
-	writeToFile	true;
-	writeControl	timeStep;
+        type            kqRWallFunction;
+        value           uniform 0.1;
     }
-
+    outlet
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
+    top
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
+    slip-bottom
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
+    bottom
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
+    defaultFaces
+    {
+        type            empty;
+    }
 }
-
 
 
 // ************************************************************************* //

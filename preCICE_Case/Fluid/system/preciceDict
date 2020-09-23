@@ -13,12 +13,6 @@ participant Fluid;
 
 modules (CHT);
 
-CHT
-{
-	solverType	basic;
-	k		100;
-}
-
 interfaces
 {
   Interface1

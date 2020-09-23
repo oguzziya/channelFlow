@@ -15,7 +15,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     scalarTransportFoam;
+application     buoyantPimpleFoam;
 
 startFrom       startTime;
 

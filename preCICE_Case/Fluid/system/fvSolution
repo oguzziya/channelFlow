@@ -13,33 +13,53 @@ FoamFile
     location    "system";
     object      fvSolution;
 }
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 solvers
 {
-    T
+    "rho.*"
     {
-        solver          	GAMG;
-        tolerance       	1e-15;
-        relTol          	0;
-        smoother		GaussSeidel;
-	cacheAgglomeration	true;
-	nCellsInCoarsestLevel	10;
-	agglomerator		faceAreaPair;
-	mergeLevels		1;
-	minIter			2;
-	maxIter			50;
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       0;
+        relTol          0;
+    }
+
+    p_rgh
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-8;
+        relTol          0.01;
+    }
+
+    p_rghFinal
+    {
+        $p_rgh;
+        relTol          0;
+    }
+
+    "(U|h|e|k|epsilon|R)"
+    {
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-6;
+        relTol          0.1;
+    }
+
+    "(U|h|e|k|epsilon|R)Final"
+    {
+        $U;
+        relTol          0;
     }
 }
 
-SIMPLE
+PIMPLE
 {
+    momentumPredictor yes;
+    nOuterCorrectors 1;
+    nCorrectors     2;
     nNonOrthogonalCorrectors 0;
-}
-
-relaxationFactors
-{
-	T	1.0;
 }
 
 

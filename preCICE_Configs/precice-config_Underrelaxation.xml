@@ -47,6 +47,7 @@
         <exchange data="Heat-Flux" mesh="Solid-Mesh" from="Solid" to="Fluid"/>
         <max-iterations value="100"/>
         <relative-convergence-measure limit="1.0e-5" data="Temperature" mesh="Fluid-Mesh"/>
+	<relative-convergence-measure limit="1.0e-5" data="Heat-Flux" mesh="Solid-Mesh"/>
 	<acceleration:constant>
             <relaxation value="0.5"/>
         </acceleration:constant>

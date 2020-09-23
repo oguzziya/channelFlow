@@ -35,9 +35,9 @@ boundaryField
     }
     top
     {
-        type            zeroGradient;
+        type            slip;
     }
-    defaultFaces
+    frontAndBack
     {
         type            empty;
     }
