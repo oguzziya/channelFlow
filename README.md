@@ -55,18 +55,18 @@ Coupling parameters are:
 ## Physics
 As for quick qualitative check, temperature contours are compared for implicit and explicit coupling. Acceleration method for the implicit coupling is quasi-Newton for preCICE case.
 
-<img src="results/temperature_contours.png" width="600">
+<img src="results/Temperature_contours.png" width="600">
 
 in general, physics of the flow seems quite similar in both variants, OpenFOAM and preCICE. preCICE ones seems for diffusive which can be due to differences in thermophysical quantities. For more quantitative comparison, values at **y=0.03** along the x-direction.
 
-<img src="results/temperature_plot.png" width="600">
+<img src="results/Temperature_plot.png" width="600">
 
 As it can be seen, we see large difference between the monolithic and partitioned approach for conjugateHeatFoam, while explicit and implicit coupling shows no difference for the preCICE cases. If we compare the implicit results of preCICE and conjugateHeatFoam, we see variation in the quantitive results. We suspect that it is related to one of the physical quantities, one possibility is the difference while defining the thermophysical quantities, the other is the contact resistance between solid and fluid, which we could not figure out whether it is used in conjugateHeatFoam or not.
 
 ## Coupling
 In order to compare the performance of difference acceleration techniques, number of coupling iterations at each time step are plotted.
 
-<img src="results/iterations.png" width="600">
+<img src="results/Iterations.png" width="600">
 
 For first 200 iterations, average iteration numbers per timestep are
 
