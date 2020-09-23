@@ -43,7 +43,7 @@ All the boundary conditions, physical properties, solver and discretization sett
 
 Coupling parameters are:
 - **Time window size:** 0.01
-- **Convergence measure:** Temperature (In OpenFOAM cases heat flux is also used, however the residuals of heat flux in OpenFOAM cases are always zero. Therefore heat flux is not included in the convergence measure.)
+- **Convergence measure:** Temperature and Heat-Flux
 - **Relative convergence tolerance:** 1e-5 (Same as OpenFOAM cases)
 
 ### Underrelaxation
