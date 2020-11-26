@@ -1,0 +1,3 @@
+[submodule "conjugateheatfoam"]
+	path = conjugateheatfoam
+	url = https://bitbucket.org/hmarschall/conjugateheatfoam.git

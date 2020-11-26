@@ -1,43 +1,44 @@
 This repository contains preCICE test cases for conjugate heat transfer of channel flow, which are extension to the work of Holger Marschall [conjugateHeatFoam](https://bitbucket.org/hmarschall/conjugateheatfoam/src/master/)
 
-# Branch structure
-master: buoyantPimpleFoam-laplacianFoam coupling without results and comments
-buoyantPimpleFoam-laplacianFoam: buoyantPimpleFoam-laplacianFoam coupling with results
-scalarTransportFoam-laplacianFoam: scalarTransportFoam-laplacianFoam coupling with results
-
-# Directory Structure
-**conjugateHeatFoam** Copy of the repository: [conjugateHeatFoam](https://bitbucket.org/hmarschall/conjugateheatfoam/src/master/)
-
-conjugateHeatFoam cases:
-- **conjugateHeatFoam_Monolithic** Monolithic coupling using conjugateHeatFoam
-- **conjugateHeatFoam_Partitioned** Partitioned coupling using conjugateHeatFoam
-
-preCICE cases:
-- **preCICE_Case** Contains the fluid and solid side setups as well as the preCICE configuration. Configuration files for different coupling schemes are in `preCICE_Configs` directory. To use different acceleration scheme, copy the respective configuration file into the case directory with name `precice-config.xml`. For example, to test Aitken acceleration:
-  
+# How to get the cases
 ```bash
-cp preCICE_Case/precice-config-Aitken.xml preCICE_Case/precice-config.xml
+git clone --recursive https://github.com/oguzziya/channelFlow.git
 ```
 
-All the cases can be directly run by moving in respective directory and executing `./Allrun`.
+# How to run the cases
+The installation and tutuinstructions of OpenFOAM solver `conjugateHeatFoam` can be found in: [conjugateHeatFoam](https://bitbucket.org/hmarschall/conjugateheatfoam/src/master/)
+
+For the preCICE cases, several options are possible to run the cases:
+
+## 1- Using Python script
+Using the script `run.py`, one can produce the preCICE configuration file and run the cases automatically. This script takes two arguments: 
+
+- OpenFOAM solver for the fluid participant: 
+	- `--scalar, -s`: scalarTransportFoam
+	- `--buoyant, -b`: buoyantPimpleFoam
+- Coupling scheme:
+	- `--explicit, -e`: Explicit coupling
+	- `--underrelaxation, -u`: Implicit coupling with constant underrelaxation
+	- `--aitken, -a`: Implicit coupling with dynamic Aitken underrelaxation
+	- `--iqn, -i`: Implicit coupling with IQN-ILS acceleration
+	
+## 2- Using Allrun or runFluid&runSolid
+`Allrun` and `runSolid` script takes one argument, which corresponds to the type of the fluid participant solver:
+- `./Allrun 1`: buoyantPimpleFoam
+- `./Allrun 2`: scalarTransportFoam
+
+The important point is that, with this approach user needs to modify the corresponding preCICE configuration file. Therefore, using the Python script is highly encouraged.
 
 # preCICE Coupling
 
 ## Software Versions
 - OpenFOAM (conjugateHeatFoam): foam-extend 4.1
-- OpenFOAM (preCICE): 19.12
+- OpenFOAM (preCICE): 20.06
 - preCICE: 2.1.0
 - preCICE OpenFOAM Adapter: c49b862aab4845ae79b8b7257a20e15ba5a0019c
 
 ## Participant Setup
 In order to make the two cases similar to each other as much as possible, `scalarTransportFoam` is used for fluid flow solver. However, OpenFOAM adapter requires solver to access Heat-Flux data, which is not trivial for `scalarTransportFoam`. Therefore it ends up with problems in the flux calculation. In order to resolve the issue, `buoyantPimpleFoam` is also used for fluid participant, which is supported by OpenFOAM Adapter out-of-the box. 
-
-For completeness, we provide both approaches in different branches as:
-
-- buoyantPimpleFoam-laplacianFoam
-- scalarTransportFoam-laplacianFoam
-
-You can checkout to individual branch to see the respective case and results. In the master, setup for `buoyantPimpleFoam-laplacianFoam` exists.
 
 All the boundary conditions, physical properties, solver and discretization settings are tried to be hold the same as the main OpenFOAM cases.
 
