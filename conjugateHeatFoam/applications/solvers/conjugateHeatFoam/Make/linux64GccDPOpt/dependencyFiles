@@ -1,5 +1,0 @@
-DEPENDENCIES = \
-coupleManager/coupleManager.dep\
-coupledFvPatchFields/regionCoupleTemperature/regionCoupleTemperatureFvPatchScalarField.dep\
-coupledFvPatchFields/regionCoupleHeatFlux/regionCoupleHeatFluxFvPatchScalarField.dep\
-conjugateHeatFoam.dep

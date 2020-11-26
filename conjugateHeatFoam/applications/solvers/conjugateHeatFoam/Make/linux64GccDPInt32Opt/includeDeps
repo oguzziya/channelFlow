@@ -1,4 +1,0 @@
-include ../../../src/coupleManager/coupleManager.dep
-include ../../../src/coupledFvPatchFields/regionCoupleTemperature/regionCoupleTemperatureFvPatchScalarField.dep
-include ../../../src/coupledFvPatchFields/regionCoupleHeatFlux/regionCoupleHeatFluxFvPatchScalarField.dep
-include conjugateHeatFoam.dep

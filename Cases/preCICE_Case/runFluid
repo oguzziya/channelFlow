@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Fluid participant
+
+# Run this script in one terminal and the "runSolid" script in another terminal.
+# These scripts present how the two participants would be started manually.
+# Alternatively, you may execute the "Allrun" script in one terminal.
+
+# The script "Allclean" cleans-up the result and log files.
+
+if [ "$1" == "--help" ] || [ "$1" == "-h" ]
+then
+        echo "Run OpenFOAM case. Possible arguments:"
+        echo "1: buoyantPimpleFoam"
+        echo "2: scalarTransportFoam"
+elif [ "$1" == "1" ]
+then
+	echo "Running buoyantPimpleFoam"
+	CASE=Fluid-buoyantPimpleFoam
+	SOLVER=buoyantPimpleFoam
+elif [ "$1" == "2" ]
+then
+	echo "Running scalarTransportFoam"
+	CASE=Fluid-scalarTransportFoam
+	SOLVER=scalarTransportFoam
+else	
+	echo "Unknown argument is given. Possible arguments:"
+	echo "1: buoyantPimpleFoam"
+	echo "2: scalarTransportFoam"
+	exit
+fi
+
+# Prepare
+blockMesh -case $CASE
+
+# Run
+$SOLVER -case $CASE
+
